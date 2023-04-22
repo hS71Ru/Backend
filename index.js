@@ -27,7 +27,7 @@ app.get('/', (req,res) => {
 })
 
 app.get("/about", (req,res) => {
-  res.send(' <input type="text" placeholder="Username" />  <button>Click Here</button>')
+  res.send(' <input type="text" placeholder="Username" />  <button>Click Here</button> <a href="/">Go To Home Page </a>')
 })
 app.listen(3500)
 
