@@ -45,9 +45,9 @@
 
 
 //Application Route
-const express= require('express');
-const app= express();
-const reqFilter=require('./middleware.js')
+// const express= require('express');
+// const app= express();
+// const reqFilter=require('./middleware.js')
 
 //middleware function
 // const reqFilter=(req,res,next)=>{
@@ -64,31 +64,41 @@ const reqFilter=require('./middleware.js')
 // }
 //app.use(reqFilter)  
 
-app.get('/',(req,res)=>{
-    res.send("Welcome to Home Page");
-})
+// app.get('/',(req,res)=>{
+//     res.send("Welcome to Home Page");
+// })
 
-app.get('/about',reqFilter, (req,res)=>{
-    res.send("Welcome to About Page");
-})
+// app.get('/about',reqFilter, (req,res)=>{
+//     res.send("Welcome to About Page");
+// })
 
-app.get('/profile',(req,res)=>{
-    res.send("Welcome Profile Page");
-})
+// app.get('/profile',(req,res)=>{
+//     res.send("Welcome Profile Page");
+// })
 
-app.get('/contact',(req,res)=>{
-    res.send("Welcome to Contact Page");
-})
+// app.get('/contact',(req,res)=>{
+//     res.send("Welcome to Contact Page");
+// })
 
-app.listen(4500);
-
+// app.listen(4500);
 
 
 
 //Connecting mongoDB
-// const express= require('express');
-// const app= express();
+const express= require('express');
+const app= express();
+const mongoose=require('mongoose');
 
-// mongodb+srv://hs71ru:<password>@cluster0.6y3abdl.mongodb.net/?retryWrites=true&w=majority
+//mongodb+srv://hs71ru:<password>@cluster0.6y3abdl.mongodb.net/?retryWrites=true&w=majority
 
-// app.listen(4500);
+mongoose.connect('mongodb+srv://hs71ru:zVReLK2gFIYsjTSM@cluster0.6y3abdl.mongodb.net/?retryWrites=true&w=majority/Town',
+
+{
+    useNewUrlParser:true,
+    useUnifiedTopology:true
+}
+).then(()=>{
+    console.warn('DB connected succesfully');
+})
+//mongodb+srv://hs71ru:<password>@cluster0.6y3abdl.mongodb.net/?retryWrites=true&w=majority
+
