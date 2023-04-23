@@ -44,30 +44,51 @@
 // console.log(a+b);
 
 
-
+//Application Route
 const express= require('express');
 const app= express();
+const reqFilter=require('./middleware.js')
+
 //middleware function
-const reqFilter=(req,res,next)=>{
-    console.log('reqFilter')
-    if(!req.query.age){
-        res.send("plese enter your age");
-    }
-    else if(req.query.age <18){
-        res.send("you cannot access  the page");
-    }
-    else{
-    next();
-    }
-}
-app.use(reqFilter)  
+// const reqFilter=(req,res,next)=>{
+//     console.log('reqFilter')
+//     if(!req.query.age){
+//         res.send("plese enter your age");
+//     }
+//     else if(req.query.age <18){
+//         res.send("you cannot access  the page");
+//     }
+//     else{
+//     next();
+//     }
+// }
+//app.use(reqFilter)  
 
 app.get('/',(req,res)=>{
     res.send("Welcome to Home Page");
 })
 
-app.get('/about',(req,res)=>{
+app.get('/about',reqFilter, (req,res)=>{
     res.send("Welcome to About Page");
 })
 
+app.get('/profile',(req,res)=>{
+    res.send("Welcome Profile Page");
+})
+
+app.get('/contact',(req,res)=>{
+    res.send("Welcome to Contact Page");
+})
+
 app.listen(4500);
+
+
+
+
+//Connecting mongoDB
+// const express= require('express');
+// const app= express();
+
+// mongodb+srv://hs71ru:<password>@cluster0.6y3abdl.mongodb.net/?retryWrites=true&w=majority
+
+// app.listen(4500);
