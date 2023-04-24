@@ -88,17 +88,36 @@
 const express= require('express');
 const app= express();
 const mongoose=require('mongoose');
+const User=require('./users');
 
 //mongodb+srv://hs71ru:<password>@cluster0.6y3abdl.mongodb.net/?retryWrites=true&w=majority
 
-mongoose.connect('mongodb+srv://hs71ru:zVReLK2gFIYsjTSM@cluster0.6y3abdl.mongodb.net/?retryWrites=true&w=majority/Town',
+mongoose.connect('mongodb+srv://hs71ru:zVReLK2gFIYsjTSM@cluster0.6y3abdl.mongodb.net/Town?retryWrites=true&w=majority/',
 
 {
     useNewUrlParser:true,
     useUnifiedTopology:true
 }
-).then(()=>{
-    console.warn('DB connected succesfully');
-})
-//mongodb+srv://hs71ru:<password>@cluster0.6y3abdl.mongodb.net/?retryWrites=true&w=majority
+);
+//.then(()=>{
+//     console.warn('DB connected succesfully');
+// })
+ //mongodb+srv://hs71ru:<password>@cluster0.6y3abdl.mongodb.net/?retryWrites=true&w=majority
+// User.find({},function(err,users){
+//     if(err){
+//         console.warn(err);
+//         console.warn(users);
+//     }
+    
+// })
 
+const data =new User({
+    _id:new mongoose.Types.ObjectId(),
+    name:"Akash",
+    email:"ar@gmail.com",
+    country:"India"
+})
+data.save().then((result)=>{
+    console.warn(result);
+})
+    .catch(err=>console.warn(err))
