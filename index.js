@@ -89,7 +89,8 @@ const express= require('express');
 const app= express();
 const mongoose=require('mongoose');
 const User=require('./users');
-
+var bodyParser=require('body-parser');
+var jsonParser=bodyParser.json();
 //mongodb+srv://hs71ru:<password>@cluster0.6y3abdl.mongodb.net/?retryWrites=true&w=majority
 
 mongoose.connect('mongodb+srv://hs71ru:zVReLK2gFIYsjTSM@cluster0.6y3abdl.mongodb.net/Town?retryWrites=true&w=majority/',
@@ -111,13 +112,36 @@ mongoose.connect('mongodb+srv://hs71ru:zVReLK2gFIYsjTSM@cluster0.6y3abdl.mongodb
     
 // })
 
-const data =new User({
+// const data =new User({
+//     _id:new mongoose.Types.ObjectId(),
+//     name:"Akash",
+//     email:"ar@gmail.com",
+//     country:"India"
+// })
+// data.save().then((result)=>{
+//     console.warn(result);
+// }) 
+//     .catch(err=>console.warn(err))
+
+//making API-GET/post method
+app.get('/users',function(req,res){
+    User.find().then((data)=>{
+        res.status(201).json(data);
+    })
+})
+app.post('/user',jsonParser,function(req,res) {
+   // res.end(req.body.name);
+    const data=new User({
     _id:new mongoose.Types.ObjectId(),
-    name:"Akash",
-    email:"ar@gmail.com",
-    country:"India"
+    name:req.body.name,
+    email:req.body.email,
+    country:req.body.country
+    })
+    data.save().then((result)=>{
+        res.status(201).json(result)
+    })
+    .catch((error)=>{
+        console.error(error)
+    })
 })
-data.save().then((result)=>{
-    console.warn(result);
-})
-    .catch(err=>console.warn(err))
+app.listen(3500)
