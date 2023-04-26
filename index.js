@@ -141,7 +141,34 @@ app.post('/user',jsonParser,function(req,res) {
         res.status(201).json(result)
     })
     .catch((error)=>{
-        console.error(error)
+        console.warn(error)
+    })
+})
+app.delete('/user/:id',function(req,res){
+    User.deleteOne({id:req.params.id}).then((result)=>{
+        res.status(200).json(result)
+    }).catch((err)=>{
+        console.warn(err)
+    })
+})
+
+app.put('/user/:id',jsonParser,function(req,res){
+    User.updateOne(
+        {_id:req.params.id},
+        {$set:{name:req.body.name}}  
+    ).then((result)=>{
+    res.status(201).json(result)
+    }).catch((error)=>{
+        console.warn(error);
+    })
+})
+app.get('/search/:name',function(req,res){
+    
+    var regex=new RegExp((req.params.name),'i');
+    User.findOne({name:regex}).then((result)=>{
+        res.status(200).json(result)
+    }).catch((error)=>{
+        console.warn(error);
     })
 })
 app.listen(3500)
